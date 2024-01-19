@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Casamento</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #container {
+            background-color: #292929;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            color: #ff69b4;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        #aceitar, #recusar {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        #aceitar {
+            background-color: #ff69b4;
+            color: #fff;
+        }
+
+        #recusar {
+            background-color: #ff4760;
+            color: #fff;
+        }
+
+            #aceitar:hover, #recusar:hover {
+                background-color: #ff3478;
+            }
+
+        .emoji-rain {
+            position: absolute;
+            animation: fall 5s linear infinite;
+            font-size: 24px;
+            color: #ff69b4;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Adicionando estilos para o painel de confirmação */
+        #confirmacao {
+            display: none;
+            background-color: #292929;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+
+        #presentear {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        #progresso-container {
+            margin-top: 20px;
+            display: none;
+        }
+
+        #progresso {
+            width: 0;
+            height: 20px;
+            background-color: #4caf50;
+            border-radius: 5px;
+        }
+
+        /* Áudio escondido */
+        #audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Pedido de Casamento</h1>
+        <p>Querida Milena Almeida,</p>
+        <p>Hoje é um dia especial, e tenho algo muito importante para te perguntar...</p>
+        <p>Você aceita se tornar a pessoa mais incrível da minha vida e se casar comigo no free fire? </p>
+
+        <button id="aceitar" onclick="responder(true)">Aceitar</button>
+        <button id="recusar" onclick="responder(false)">Recusar</button>
+
+        <!-- Adicionando o painel de confirmação -->
+        <div id="confirmacao">
+            <p>Parabéns! Você tomou uma excelente decisão.</p>
+            <p>Agora, clique no botão abaixo para receber uma flor:</p>
+            <button id="presentear" onclick="presentear()">Presentear com uma flor</button>
+            <div id="progresso-container">
+                <div id="progresso"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function responder(aceitou) {
+            if (aceitou) {
+                
+                window.location.href = 'video.html';
+               
+            } else {
+                alert('Oh não! Vamos conversar sobre isso. Talvez eu deva tentar algo mais romântico na próxima vez.');
+            }
+        }
+
+        function mostrarConfirmacao() {
+            // Exibir o painel de confirmação
+            document.getElementById('confirmacao').style.display = 'block';
+        }
+
+        function presentear() {
+            // Exibir a barra de progresso
+            document.getElementById('progresso-container').style.display = 'block';
+            // Atualizar a barra de progresso a cada segundo
+            var barraProgresso = document.getElementById('progresso');
+            var width = 0;
+            var intervalo = setInterval(function () {
+                if (width >= 100) {
+                    clearInterval(intervalo);
+                    // Após a conclusão da barra de progresso, redirecionar para uma nova aba com o link desejado
+                   
+                } else {
+                    width++;
+                    barraProgresso.style.width = width + '%';
+                }
+            }, 100);
+        }
+
+        function createEmoji() {
+            const emojis = ['❤️', '💍', '🌈', '🎉', '😍', '💑', '👰', '🤵'];
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji-rain';
+            emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * window.innerWidth + 'px';
+            document.body.appendChild(emoji);
+            setTimeout(() => {
+                emoji.remove();
+            }, 5000);
+        }
+
+        setInterval(createEmoji, 300);
+    </script>
+</body>
+</html>
